@@ -95,5 +95,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         plot.redraw(); //needs to be called no mater what changes done.
+
+        //experimental functions:
+        //plot.getGraphWidget().getDomainCursorPosition()
+        //---GRIDLINE MOD---//
+//        plot.getGraphWidget().setDomainGridLinePaint();
+//        plot.getGraphWidget().setDomainSubGridLinePaint();
+
+        //--Subtick??--//
+//        plot.getGraphWidget().setDomainLabelSubTickExtension();
+
+        //--CURSOR. what is cursor?///
+//        plot.getGraphWidget().setCursorLabelPaint();
+//        plot.getGraphWidget().setCursorPosition();
+
     }
 }

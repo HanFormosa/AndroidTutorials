@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Han Shared Service</string>
+    <string name="action_start_service">Start Service</string>
+    <string name="action_stop_service">Stop Service</string>
+    <string name="hello_world">Hello Service!</string>
+</resources>

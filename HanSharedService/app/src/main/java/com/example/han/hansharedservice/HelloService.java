@@ -20,10 +20,10 @@ public class HelloService extends Service {
     public HelloService() {
     }
 
-    String SERVERIP = "192.168.2.107";
+    String SERVERIP = "192.168.2.108";
     public static final int SERVERPORT = 5004;
 
-    private static final String tag = HelloService.class.getSimpleName();
+//    private static final String tag = HelloService.class.getSimpleName();
 
     PrintWriter out;
     Socket socket;
@@ -162,41 +162,8 @@ public class HelloService extends Service {
 
                     //send the message to the server
                     out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-                    //Get the input stream of the client socket TODO: keep putting messages into "in" a buffered reader.
-//                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//                    is = new DataInputStream(socket.getInputStream());
-//                    Log.i(TAG, "input stream is ran");
-//                    while (mRun) { //TODO: keep running, unless want to stop listening, call stopClient()?
-////                        serverMessage = in.readLine();
-////
-//                        String[] s = new String[64];
-//                        int size = is.read(data);
-////                        Log.i(TAG, "data is  " + Arrays.toString(data) + "size is: " + size);
-////                        for(int i = 0 ; i < size; i ++){
-////                            s[i] = String.format("%02X",data[i]);
-////                            Log.i(TAG, "data is  " + s[i] + "pos is: " + i);
-////                        }
-//
-//                        //TODO: call a method in activity to pass the message to bounded activity (maybe by service callbacks)
-//                        //only call method if data is not empty , detect empty bytes, detect CRLF byte
-//                        if (size != 0){
-//                            //detect CRLF byte
-//                            String s63 = String.format("%02X", data[62]);//"\r"
-//                            String s64 = String.format("%02X", data[63]);//"\n"
-//                            if (s63.equals("0D") && s64.equals("0A")){
-//                                //TODO: update the cmd available
-//                                if (cmd.equals("E3") || cmd.equals("68") || cmd.equals("ED") || cmd.equals("EC")){
-//                                    //call callback
-//                                    Log.i(TAG, "callback will be called");
-//                                    serviceCallbacks.processDataReceivedfromDevice(data);
-//                                }
-//                            }
-//                        }
-//
-//                    }
                     Log.e("TCP Client", "C: Sent.");
                     Log.e("TCP Client", "C: Done.");
-//                    Log.i(TAG,"REsult is " + result);
                 }
                 catch (Exception e) {
                     Log.e("TCP", "S: Error", e);

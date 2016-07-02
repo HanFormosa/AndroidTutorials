@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         LineAndPointFormatter seriesMagFormat = new LineAndPointFormatter(Color.rgb(200, 0, 200), null, null, null);
         magSeries = new SimpleXYSeries(Arrays.asList(MagArray),
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Mag");
-        
+
         //centripetal don't seem to a difference in smoothness.
         seriesMagFormat.setInterpolationParams(
             new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
@@ -189,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
         //--CURSOR. what is cursor?///
 //        plot.getGraphWidget().setCursorLabelPaint();
 //        plot.getGraphWidget().setCursorPosition();
+
+
+//        plot.setUserDomainOrigin();
+        
 
     }
 

@@ -6,7 +6,7 @@ package com.formosaaudio.simplexyplot;
 public class PEQ {
 
     public static final int kLPF = 0;
-    private static final double kSAMPLESIZE = 48000;
+    public static final double kSAMPLESIZE = 48000;
     private double freq;
     private double Q;
 
@@ -47,9 +47,9 @@ public class PEQ {
             case kLPF:
                 //a0 : etc.
                 alpha = Math.sin(getW0())/(2*Q);
-                b[0] = 1 - Math.cos(getW0())/2;
+                b[0] = (1 - Math.cos(getW0()))/2;
                 b[1] = 1 - Math.cos(getW0());
-                b[2] = 1 - Math.cos(getW0())/2;
+                b[2] = (1 - Math.cos(getW0()))/2;
                 a[0] = 1 + alpha;
                 a[1] = -2 * Math.cos(getW0());
                 a[2] = 1 - alpha;

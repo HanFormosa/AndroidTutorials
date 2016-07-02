@@ -24,11 +24,18 @@ public class MainActivity extends AppCompatActivity {
     private SimpleXYSeries mySeries = null;
     private XYSeries series1 = null;
     private XYSeries series2 = null;
+    private Number[] freqArray = new Number[285];
+    private Number[] MagArray = new Number[285];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simply_xy_plot_example);
 
+        //initialise freqarray and magnitude array
+        for (int i = 0; i < 285 ; i ++){
+            freqArray[i] = 0;
+            MagArray[i] = 0;
+        }
 
         // initialize our XYPlot reference:
         plot = (XYPlot) findViewById(R.id.plot);
@@ -134,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calcFreqMag(PEQ peq, int mode){
-        
+
     }
 
 }

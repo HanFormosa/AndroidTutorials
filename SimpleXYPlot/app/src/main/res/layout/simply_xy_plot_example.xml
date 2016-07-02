@@ -24,4 +24,15 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/testButton2"
+        android:text="TEST2"
+        android:textColor="@android:color/white"
+        android:onClick="drawSomething2"
+        android:layout_below="@+id/testButton"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

@@ -25,10 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private SimpleXYSeries mySeries = null;
     private XYSeries series1 = null;
     private XYSeries series2 = null;
-    private Number[] freqArray = new Number[285];
-    private Number[] MagArray = new Number[285];
-    private Number[] w0Array = new Number[285];
-    private Number[] phiArray = new Number[285];
+    private XYSeries magSeries = null;
+    private Number[] freqArray = new Number[273];
+    private Number[] MagArray = new Number[273];
+    private Number[] w0Array = new Number[273];
+    private Number[] phiArray = new Number[273];
     private PEQ myLPF = new PEQ(500, 0.71);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.simply_xy_plot_example);
 
         //initialise freqarray and magnitude array
-        for (int i = 0; i < 285 ; i ++){
+        for (int i = 0; i < 273 ; i ++){
             freqArray[i] = 0;
             MagArray[i] = 0;
             w0Array[i] = 0;
@@ -127,21 +128,31 @@ public class MainActivity extends AppCompatActivity {
         series2Format.setInterpolationParams(
                 new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
 
+        LineAndPointFormatter seriesMagFormat = new LineAndPointFormatter(Color.rgb(200, 0, 200), null, null, null);
+        magSeries = new SimpleXYSeries(Arrays.asList(MagArray),
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Mag");
+        
+        //centripetal don't seem to a difference in smoothness.
+        seriesMagFormat.setInterpolationParams(
+            new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
+        plot.addSeries(magSeries,seriesMagFormat);
+
         // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
-        plot.addSeries(series2, series2Format);
+//        plot.addSeries(series1, series1Format);
+//        plot.addSeries(series2, series2Format);
 
         // reduce the number of range labels
 //        plot.setTicksPerRangeLabel(3);
 
         // thin out domain tick labels so they dont overlap each other:
         plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
-        plot.setDomainStepValue(1);
+        plot.setDomainStepValue(100);
 
         plot.setRangeStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setRangeStepValue(10);
 
-        plot.setRangeBoundaries(0, 100, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(-50, 10, BoundaryMode.FIXED);
+        plot.setDomainBoundaries(0,270,BoundaryMode.FIXED);
         // rotate domain labels 45 degrees to make them more compact horizontally:
         plot.getGraphWidget().setDomainLabelOrientation(-45);
 
@@ -182,8 +193,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void drawSomething2(View v){
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.rgb(200, 0, 200), null, null, null);
-        plot.addSeries(series1,series1Format);
+
+        plot.removeSeries(magSeries);
+
+        double freq = myLPF.getFreq();
+        freq = freq + 10.0;
+        myLPF.setFreq(freq);
+
+        myLPF.calcCoeffs(PEQ.kLPF);
+        calcFreqMag(myLPF);
+
+        LineAndPointFormatter seriesMagFormat = new LineAndPointFormatter(Color.rgb(200, 0, 200), null, null, null);
+        magSeries = new SimpleXYSeries(Arrays.asList(MagArray),
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Mag");
+
+        plot.addSeries(magSeries,seriesMagFormat);
         plot.redraw();
     }
 

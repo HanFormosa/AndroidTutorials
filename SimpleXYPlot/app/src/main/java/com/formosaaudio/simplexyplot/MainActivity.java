@@ -133,4 +133,8 @@ public class MainActivity extends AppCompatActivity {
         plot.redraw();
     }
 
+    public void calcFreqMag(PEQ peq, int mode){
+        
+    }
+
 }

@@ -81,20 +81,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void drawSomething(View view){
-        Number[] series3Numbers = {1, 64, 64, 64, 64, 64, 64, 64, 64, 64};
-        XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers),
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series3");
-        LineAndPointFormatter series3Format = new LineAndPointFormatter();
-        series3Format.setPointLabelFormatter(new PointLabelFormatter());
-        series3Format.configure(getApplicationContext(),
-                R.xml.line_point_formatter_with_labels_3);
+//        Number[] series3Numbers = {1, 64, 64, 64, 64, 64, 64, 64, 64, 64};
+//        XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers),
+//                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series3");
+//        LineAndPointFormatter series3Format = new LineAndPointFormatter();
+//        series3Format.setPointLabelFormatter(new PointLabelFormatter());
+//        series3Format.configure(getApplicationContext(),
+//                R.xml.line_point_formatter_with_labels_3);
+//
+//        series3Format.setInterpolationParams(
+//                new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
+//        plot.addSeries(series3, series3Format);
+//
+//
+//        plot.redraw(); //needs to be called no mater what changes done.
 
-        series3Format.setInterpolationParams(
-                new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
-        plot.addSeries(series3, series3Format);
-
-
-        plot.redraw(); //needs to be called no mater what changes done.
+        plot.clear();
+        plot.redraw();
 
         //experimental functions:
         //plot.getGraphWidget().getDomainCursorPosition()

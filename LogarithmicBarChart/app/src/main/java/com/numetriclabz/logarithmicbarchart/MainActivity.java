@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.numetriclabz.numandroidcharts.ChartData;
 import com.numetriclabz.numandroidcharts.LogarithmicBarChart;
+import com.numetriclabz.numandroidcharts.LogarithmicLineChart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         LogarithmicBarChart barChart = (LogarithmicBarChart) findViewById(R.id.chart);
 
+        LogarithmicLineChart lineChart ;
         List<ChartData> value1 = new ArrayList<>();
 
         //values.add(new ChartData(y,x));
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<ChartData> dataSet = new ArrayList<>();
         dataSet.add(new ChartData(value1));
-
+        
         barChart.setData(dataSet);
         barChart.setBase(10);
     }

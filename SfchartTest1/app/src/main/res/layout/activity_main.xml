@@ -16,7 +16,23 @@
 
     <com.syncfusion.charts.SfChart
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:id="@+id/sfchart">
     </com.syncfusion.charts.SfChart>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="button 2"
+        android:id="@+id/button2"
+        android:layout_above="@+id/button"
+        android:onClick="onClick2"/>
 </RelativeLayout>

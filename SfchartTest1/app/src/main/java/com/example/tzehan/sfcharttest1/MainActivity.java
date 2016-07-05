@@ -2,6 +2,8 @@ package com.example.tzehan.sfcharttest1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.syncfusion.charts.CategoryAxis;
 import com.syncfusion.charts.ChartDataPoint;
@@ -14,14 +16,16 @@ import com.syncfusion.charts.enums.Visibility;
 
 public class MainActivity extends AppCompatActivity {
 
+    DataModel dataModel  =  new DataModel  ();
+    private static final String TAG = "SF";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        SfChart chart = (SfChart)findViewById(R.id.sfchart);
 
+        final SfChart chart = (SfChart)findViewById(R.id.sfchart);
         //Initializing chart
 
         chart.getTitle().setText("Weather Analysis");
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         chart.getSecondaryAxis().getTitle().setText("Temperature");
 
-        DataModel dataModel  =  new DataModel  ();
+
 
         //Adding ColumnSeries to the chart for Precipitation
 
@@ -53,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         numeric.setOpposedPosition(true);
 
         numeric.setShowMajorGridLines(true);
+        //set axis boundary
+        numeric.setMaximum(5);
+        numeric.setMinimum(0);
 
         series.setYAxis(numeric);
 
@@ -66,6 +73,46 @@ public class MainActivity extends AppCompatActivity {
 
         seriesHigh.setLabel("High");
 
+        NumericalAxis numeric2 = new NumericalAxis();
+        numeric2.setMaximum(90);
+        numeric2.setMinimum(0);
+        chart.setSecondaryAxis(numeric2);
+        dataModel.HighTemperature.setOnCollectionChangedListener(new ObservableArrayList.OnCollectionChangedListener() {
+            @Override
+            public void onAddIndex(int i, Object o) {
+                Log.i(TAG, "series high on add index");
+            }
+
+            @Override
+            public void onAddObject(Object o) {
+                Log.i(TAG, "series high on add object");
+            }
+
+            @Override
+            public void onRemoveIndex(int i, Object o) {
+                Log.i(TAG, "series high on remove index");
+            }
+
+            @Override
+            public void onRemoveObject(Object o) {
+                Log.i(TAG, "series high on remove object");
+            }
+
+            @Override
+            public void onClearList() {
+                Log.i(TAG, "series high cleared");
+            }
+
+            @Override
+            public void onAddAll(int i) {
+                Log.i(TAG, "series high on Add all");
+            }
+
+            @Override
+            public void onSetObject(int i, Object o) {
+                Log.i(TAG, "series high on set object");
+            }
+        });
         chart.getSeries().add(seriesHigh);
 
         //Adding the SplineSeries to the chart for low temperature
@@ -83,6 +130,50 @@ public class MainActivity extends AppCompatActivity {
         chart.getLegend().setVisibility(Visibility.Visible);
 
 
+
+    }
+
+    public void onClick(View v){
+        SfChart chart = (SfChart)findViewById(R.id.sfchart);
+//        chart.getSeries().removeAll(dataModel.HighTemperature);
+        dataModel.HighTemperature.clear();
+        chart.redrawChart();
+    }
+
+    public void onClick2(View v){
+        SfChart chart = (SfChart)findViewById(R.id.sfchart);
+//        chart.getSeries().removeAll(dataModel.HighTemperature);
+//        SplineSeries seriesHigh = new SplineSeries();
+//        seriesHigh.setDataSource(dataModel.HighTemperature);
+//        seriesHigh.setLabel("High");
+//        chart.getSeries().add(seriesHigh);
+
+
+//        chart.reloadChart();
+//        chart.redrawChart();
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Jan",  42));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Feb",  44));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Mar",  53));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Apr",  64));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("May",  75));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Jun",  83));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Jul",  87));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Aug",  84));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Sep",  78));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Oct",  67));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Nov",  55));
+
+        dataModel.HighTemperature.add(new ChartDataPoint  ("Dec",  45));
 
     }
 
@@ -176,5 +267,10 @@ public class DataModel {
         Precipitation.add(new ChartDataPoint  ("Dec",  2.8));
     }
 }
+
+    public class DataModel2{
+        public ObservableArrayList  FreqMag;
+
+    }
 }
 

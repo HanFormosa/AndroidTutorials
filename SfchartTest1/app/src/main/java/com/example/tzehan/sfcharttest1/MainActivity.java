@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "series high on set object");
             }
         });
+        seriesHigh.setStrokeWidth(10.0f);
         chart.getSeries().add(seriesHigh);
 
         //Adding the SplineSeries to the chart for low temperature
@@ -133,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
         seriesLow.setLabel("Low");
         seriesLow.setDataPointSelectionEnabled(true);
         seriesLow.setSelectedDataPointIndex(1);
-        seriesLow.setAlpha(0.25f);
+        seriesLow.setAlpha(0.5f);
+        seriesLow.setStrokeWidth(10.0f);
         chart.getSeries().add(seriesLow);
 
         //Adding Chart Legend for the Chart

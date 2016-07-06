@@ -1,5 +1,6 @@
 package com.example.tzehan.sfcharttest1;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -132,8 +133,10 @@ public class MainActivity extends AppCompatActivity {
         seriesLow.setDataSource(dataModel.LowTemperature);
 
         seriesLow.setLabel("Low");
+        int greenColorValue = Color.GREEN;
         seriesLow.setDataPointSelectionEnabled(true);
         seriesLow.setSelectedDataPointIndex(1);
+        seriesLow.setColor(greenColorValue);
         seriesLow.setAlpha(0.5f);
         seriesLow.setStrokeWidth(10.0f);
         chart.getSeries().add(seriesLow);

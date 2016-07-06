@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ChartTrackballBehavior trackballBehavior = new ChartTrackballBehavior();
         trackballBehavior.setShowLabel(true);
         trackballBehavior.setShowLine(true);
+        trackballBehavior.getLineStyle().setStrokeColor(Color.BLACK);//no effect
+        trackballBehavior.getLineStyle().setStrokeWidth(2.0f); //no effect
         trackballBehavior.setLabelDisplayMode(TrackballLabelDisplayMode.NearestPoint);
         chart.getBehaviors().add(trackballBehavior);
 
@@ -135,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
         seriesLow.setLabel("Low");
         int greenColorValue = Color.GREEN;
         seriesLow.setDataPointSelectionEnabled(true);
-        seriesLow.setSelectedDataPointIndex(1);
+        seriesLow.setSelectedDataPointIndex(10);
         seriesLow.setColor(greenColorValue);
         seriesLow.setAlpha(0.5f);
-        seriesLow.setStrokeWidth(10.0f);
+        seriesLow.setStrokeWidth(10.0f);//no effect
         chart.getSeries().add(seriesLow);
 
         //Adding Chart Legend for the Chart

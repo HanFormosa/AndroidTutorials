@@ -12,6 +12,7 @@ import com.syncfusion.charts.ColumnSeries;
 import com.syncfusion.charts.NumericalAxis;
 import com.syncfusion.charts.ObservableArrayList;
 import com.syncfusion.charts.SfChart;
+import com.syncfusion.charts.SplineAreaSeries;
 import com.syncfusion.charts.SplineSeries;
 import com.syncfusion.charts.enums.TrackballLabelDisplayMode;
 import com.syncfusion.charts.enums.Visibility;
@@ -125,13 +126,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Adding the SplineSeries to the chart for low temperature
 
-        SplineSeries seriesLow = new SplineSeries();
+        SplineAreaSeries seriesLow = new SplineAreaSeries();
 
         seriesLow.setDataSource(dataModel.LowTemperature);
 
         seriesLow.setLabel("Low");
         seriesLow.setDataPointSelectionEnabled(true);
         seriesLow.setSelectedDataPointIndex(1);
+        seriesLow.setAlpha(0.25f);
         chart.getSeries().add(seriesLow);
 
         //Adding Chart Legend for the Chart

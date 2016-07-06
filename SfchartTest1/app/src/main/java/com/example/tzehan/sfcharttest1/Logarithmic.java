@@ -3,14 +3,17 @@ package com.example.tzehan.sfcharttest1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.syncfusion.charts.CategoryAxis;
 import com.syncfusion.charts.ChartDataPoint;
+import com.syncfusion.charts.ChartTrackballBehavior;
 import com.syncfusion.charts.LogarithmicAxis;
 import com.syncfusion.charts.NumericalAxis;
 import com.syncfusion.charts.ObservableArrayList;
 import com.syncfusion.charts.SfChart;
 import com.syncfusion.charts.SplineSeries;
+import com.syncfusion.charts.enums.TrackballLabelDisplayMode;
 import com.syncfusion.charts.enums.Visibility;
 
 import java.util.Arrays;
@@ -21,7 +24,8 @@ public class Logarithmic extends AppCompatActivity {
     private Number[] MagArray = new Number[273];
     private Number[] w0Array = new Number[273];
     private Number[] phiArray = new Number[273];
-    private PEQ myLPF = new PEQ(2000, 0.71);
+    private PEQ myLPF = new PEQ(200, 0.71);
+
     DataModel dataModel  =  new DataModel  ();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +87,23 @@ public class Logarithmic extends AppCompatActivity {
         chart.getTitle().setText("Frequency Response");
 
         //Initializing Primary Axis
+        LogarithmicAxis logarithmic = new LogarithmicAxis();
 
-        chart.setPrimaryAxis(new LogarithmicAxis());
+        logarithmic.setMinorTicksPerInterval(5);
+        logarithmic.setShowMinorGridLines(true);
+//        logarithmic.setShowMajorGridLines(true);
+        chart.setPrimaryAxis(logarithmic);
 
         chart.getPrimaryAxis().getTitle().setText("Frequency");
 
         //Initializing Secondary Axis
 
-        chart.setSecondaryAxis(new NumericalAxis());
+        NumericalAxis numeric = new NumericalAxis();
+//        numeric.setMinorTicksPerInterval(5);
+//        numeric.setShowMinorGridLines(true);
+        numeric.setMaximum(10);
+        numeric.setMinimum(-20);
+        chart.setSecondaryAxis(numeric);
 
 //        chart.getSecondaryAxis().getTitle().setText("dB");
 
@@ -99,19 +112,27 @@ public class Logarithmic extends AppCompatActivity {
         seriesLow.setDataSource(dataModel.MagLPF);
 
         seriesLow.setLabel("LPF");
-
+        seriesLow.setDataPointSelectionEnabled(true);
+//        seriesLow.setSelectedDataPointIndex(10);//can't be put after add series.
         chart.getSeries().add(seriesLow);
 
         //Adding Chart Legend for the Chart
 
         chart.getLegend().setVisibility(Visibility.Visible);
 
+        ChartTrackballBehavior trackballBehavior = new ChartTrackballBehavior();
+        trackballBehavior.setShowLabel(true);
+        trackballBehavior.setShowLine(true);
+        trackballBehavior.setLabelDisplayMode(TrackballLabelDisplayMode.NearestPoint);
+        chart.getBehaviors().add(trackballBehavior);
+
+
 
         /**
          * configure data here.
          */
         dataModel.MagLPF.clear();
-        for (int i =0; i < 272; i++){
+        for (int i =0; i < 181; i++){
             Comparable f = ((Comparable) freqArray[i]);
             dataModel.MagLPF.add(new ChartDataPoint  (f,  MagArray[i]));
         }
@@ -162,5 +183,21 @@ public class Logarithmic extends AppCompatActivity {
 //            MagLPF.add(new ChartDataPoint  ("Jul",  87));
 
         }
+    }
+
+    public void changeFreq (View v){
+
+        double freq = myLPF.getFreq();
+        freq = freq+10;
+        myLPF.setFreq(freq);
+        //calculate magnitude
+        myLPF.calcCoeffs(PEQ.kLPF);
+        calcFreqMag(myLPF);
+        dataModel.MagLPF.clear();
+        for (int i =0; i < 181; i++){
+            Comparable f = ((Comparable) freqArray[i]);
+            dataModel.MagLPF.add(new ChartDataPoint  (f,  MagArray[i]));
+        }
+
     }
 }

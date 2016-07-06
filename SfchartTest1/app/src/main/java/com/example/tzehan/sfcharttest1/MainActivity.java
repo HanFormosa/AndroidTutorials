@@ -7,11 +7,13 @@ import android.view.View;
 
 import com.syncfusion.charts.CategoryAxis;
 import com.syncfusion.charts.ChartDataPoint;
+import com.syncfusion.charts.ChartTrackballBehavior;
 import com.syncfusion.charts.ColumnSeries;
 import com.syncfusion.charts.NumericalAxis;
 import com.syncfusion.charts.ObservableArrayList;
 import com.syncfusion.charts.SfChart;
 import com.syncfusion.charts.SplineSeries;
+import com.syncfusion.charts.enums.TrackballLabelDisplayMode;
 import com.syncfusion.charts.enums.Visibility;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         //Initializing chart
 
         chart.getTitle().setText("Weather Analysis");
+        ChartTrackballBehavior trackballBehavior = new ChartTrackballBehavior();
+        trackballBehavior.setShowLabel(true);
+        trackballBehavior.setShowLine(true);
+        trackballBehavior.setLabelDisplayMode(TrackballLabelDisplayMode.NearestPoint);
+        chart.getBehaviors().add(trackballBehavior);
 
         //Initializing Primary Axis
 
@@ -62,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         numeric.setMinimum(0);
 
         series.setYAxis(numeric);
-
+        series.setDataPointSelectionEnabled(true);
+        series.setSelectedDataPointIndex(3);
         chart.getSeries().add(series);
 
         //Adding the SplineSeries to the chart for high temperature
@@ -122,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         seriesLow.setDataSource(dataModel.LowTemperature);
 
         seriesLow.setLabel("Low");
-
+        seriesLow.setDataPointSelectionEnabled(true);
+        seriesLow.setSelectedDataPointIndex(1);
         chart.getSeries().add(seriesLow);
 
         //Adding Chart Legend for the Chart
